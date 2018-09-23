@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.circle.mapper.OTHER_TYPEMapper">
+	<resultMap id="BaseResultMap" type="com.circle.entity.OTHER_TYPE">
+		<id column="OT_ID" property="otId" jdbcType="INTEGER" />
+		<result column="OT_SORT" property="otSort" jdbcType="INTEGER" />
+		<result column="OT_NAME" property="otName" jdbcType="VARCHAR" />
+		<result column="OT_IDS" property="otIds" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		OT_ID, OT_SORT, OT_NAME, OT_IDS
+	</sql>
+	<!-- List<OTHER_TYPE> Stypelist(); -->
+	<select id="Stypelist" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from OTHER_TYPE
+		where OT_IDS = 0
+	</select>
+
+	<!-- List<OTHER_TYPE> Btypelist(); -->
+	<select id="Btypelist" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from OTHER_TYPE
+		where OT_IDS != 0
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from OTHER_TYPE
+		where OT_ID = #{otId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		OTHER_TYPE
+		where OT_ID = #{otId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.circle.entity.OTHER_TYPE">
+		insert into OTHER_TYPE ( 
+		OT_SORT, OT_NAME,
+		OT_IDS)
+		values ( 
+		#{otSort,jdbcType=INTEGER},
+		#{otName,jdbcType=VARCHAR},
+		#{otIds,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.circle.entity.OTHER_TYPE">
+		insert into OTHER_TYPE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="otId != null">
+				OT_ID,
+			</if>
+			<if test="otSort != null">
+				OT_SORT,
+			</if>
+			<if test="otName != null">
+				OT_NAME,
+			</if>
+			<if test="otIds != null">
+				OT_IDS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="otId != null">
+				#{otId,jdbcType=INTEGER},
+			</if>
+			<if test="otSort != null">
+				#{otSort,jdbcType=INTEGER},
+			</if>
+			<if test="otName != null">
+				#{otName,jdbcType=VARCHAR},
+			</if>
+			<if test="otIds != null">
+				#{otIds,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.OTHER_TYPE">
+		update OTHER_TYPE
+		<set>
+			<if test="otSort != null">
+				OT_SORT = #{otSort,jdbcType=INTEGER},
+			</if>
+			<if test="otName != null">
+				OT_NAME = #{otName,jdbcType=VARCHAR},
+			</if>
+			<if test="otIds != null">
+				OT_IDS = #{otIds,jdbcType=INTEGER},
+			</if>
+		</set>
+		where OT_ID = #{otId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.circle.entity.OTHER_TYPE">
+		update OTHER_TYPE
+		set OT_SORT = #{otSort,jdbcType=INTEGER},
+		OT_NAME =
+		#{otName,jdbcType=VARCHAR},
+		OT_IDS = #{otIds,jdbcType=INTEGER}
+		where
+		OT_ID = #{otId,jdbcType=INTEGER}
+	</update>
+</mapper>

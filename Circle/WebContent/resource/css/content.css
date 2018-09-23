@@ -1,0 +1,225 @@
+@charset "utf-8";
+/* 公共样式 */
+body{margin:0px; padding:0px; text-decoration:none; font-family:'微软雅黑';font-size:13px;}
+dd{margin-left:0;}
+ul,img,form,p,li,dl,dt,div,h1,h2{ margin:0; padding:0; border:0; font-weight:normal;}
+li{list-style:none;}
+.cle{clear:both;}
+.imgmid{display:inline-block;*display:inline;*zoom:1;height:100%;width:1px;margin-left:-1px;vertical-align:middle}
+a{text-decoration:none;color:#333;}
+a:hover{color:#004877; text-decoration:none;}
+.flo_right{float:right;}
+.flo_left{float:left;}
+.webbody{width:980px; height:auto; margin:0 auto; float:none;}
+.overflow{overflow:hidden;}
+.wid100{width: 100px;}
+.wid150{width: 150px;}
+.wid230{width: 230px;}
+.marlr5{margin:0 5px; }
+
+table{
+
+	border-left: 1px solid #e4e4e4;
+	border-top: 1px solid #e4e4e4;
+}
+
+td,th{
+
+	border-right: 1px solid #e4e4e4;
+	border-bottom: 1px solid #e4e4e4;
+	text-indent: 10px;
+	line-height: 22px;
+	padding:5px 0; 
+
+}
+
+th{
+	background:#ededed;
+	color:#333;
+}
+
+.location{
+
+	border:1px solid #e4e4e4; 
+	background:#f9f9f9;
+	padding:8px; 
+	margin-bottom: 6px;
+}
+
+.mainfoot{
+
+	border:1px solid #e4e4e4; 
+	background:#f9f9f9;
+	padding:5px; 
+	margin-top: 6px;
+}
+
+.left_scroll{
+
+	width: 100%;
+	height: 100%;
+	float: left;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+/*
+	-------------------------------------------
+	| Login面样式
+	-------------------------------------------
+
+*/
+
+.login_title{
+
+	text-align: center;
+	line-height: 70px;
+	font-size: 24px;
+	color: #fff;
+}
+
+.login_bottom{
+
+	position: fixed;
+	bottom: 0;
+	height: 36px;
+	line-height: 36px;
+	width: 100%;
+	background: #333 url(../images/menu_bg.jpg) repeat-x left bottom;
+	text-align: center;
+	color: #666;
+	border-top: 1px solid #000;
+}
+
+.loginbox{
+
+	position: absolute;
+	width: 440px;
+	left: 50%;
+	margin-left: -220px;
+	top: 70px;
+	background: url(../images/login_line.jpg) repeat-y center top;
+
+}
+
+.form_login{
+
+	margin-top: 30%;
+	border:2px solid #a90000;
+	padding:10px;
+	height: 230px;
+	background: #000;
+	border-radius: 12px;
+}
+
+.inpu{
+
+	background-color: #333;
+	border:1px solid #a90000;
+	line-height:32px;
+	height: 32px;
+	text-indent: 12px;
+	color: #999;
+	width: 200px;
+	border-radius: 4px;
+	float: left;
+	background: none;
+	
+}
+
+.common{
+
+	float: left;
+	width: 100%;
+}
+
+.mart6{margin: 6px 0;}
+
+.addborder{
+
+	border: 1px solid #e8e8e8;
+	padding: 4px 0;
+	line-height: 24px;
+}
+
+li.common:hover{
+
+	box-shadow: 4px 0 4px 0px #bababa;
+}
+
+.textshen{
+	white-space: nowrap;
+	display: block;
+	overflow: hidden;
+}
+.wid120{
+	width: 100px;
+	border-right: 1px solid #e8e8e8;
+	margin-right: 20px;
+	text-indent: 16px;
+}
+
+.inpbor{
+
+	line-height: 20px;
+	height: 20px;
+	text-indent: 3px;
+}
+
+.textarea{
+	text-indent: 3px;
+}
+
+.wid200{
+	width: 200px;
+}
+
+.wid350{
+	width: 350px;
+}
+
+.wid60{width: 60px;}
+
+.wid30{width: 30px;}
+
+.submitbtn{margin-top: 5px;}
+
+.submitbtn input{
+
+	padding: 2px 15px 5px 15px;
+	text-align: center;
+	font-family: '微软雅黑';
+	font-size: 14px;
+	margin-left: 121px;
+	cursor: pointer;
+}
+table.listtable td{
+
+
+}
+table.listtable tr:hover{
+	background-color: #f9f9f9;
+	box-shadow: 6px 0 6px 0px #bababa;
+}
+
+
+.pageshow a,.pageshow span{
+	display: inline-table;
+	line-height: 24px;
+	border:1px solid #ddd;
+	background-color: #fff;
+	padding: 0 8px;
+	min-width: 12px;
+	text-align: center;
+	color: #666;
+}
+
+.pageshow a:hover{
+	color: #333;
+}
+
+.pageshow .current{
+	border:1px solid #eb3f2f;
+	background-color: #eb3f2f;
+	color: #fff;
+}

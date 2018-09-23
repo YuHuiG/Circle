@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.circle.mapper.OTHER_MESSAGEMapper">
+	<resultMap id="BaseResultMap" type="com.circle.entity.OTHER_MESSAGE">
+		<id column="OM_ID" property="omId" jdbcType="INTEGER" />
+		<result column="OM_TITLE" property="omTitle" jdbcType="VARCHAR" />
+		<result column="OM_TYPEID" property="omTypeid" jdbcType="INTEGER" />
+		<result column="OM_CONTENT" property="omContent" jdbcType="VARCHAR" />
+		<result column="OM_DATE" property="omDate" jdbcType="VARCHAR" />
+		<result column="OM_SORT" property="omSort" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		OM_ID, OM_TITLE, OM_TYPEID, OM_CONTENT, OM_DATE, OM_SORT
+	</sql>
+
+
+	<!-- int count(); -->
+	<select id="count" resultType="java.lang.Integer">
+		exec proc_count 'OTHER_MESSAGE'
+	</select>
+	<!-- List<OTHER_MESSAGE> queryall(Map<String, Object> m); -->
+	<select id="queryall" statementType="CALLABLE" resultMap="BaseResultMap">
+		EXEC
+		prc_PageResult
+		#{currPage},'
+		<include refid="Base_Column_List" />
+		','OTHER_MESSAGE','','OM_ID','0','OM_ID','10'
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from OTHER_MESSAGE
+		where OM_ID = #{omId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		OTHER_MESSAGE
+		where OM_ID = #{omId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.circle.entity.OTHER_MESSAGE">
+		insert into OTHER_MESSAGE
+		(
+		OM_TITLE, OM_TYPEID,
+		OM_CONTENT, OM_DATE, OM_SORT
+		)
+		values
+		(
+		#{omTitle,jdbcType=VARCHAR},
+		#{omTypeid,jdbcType=INTEGER},
+		#{omContent,jdbcType=VARCHAR},
+		#{omDate,jdbcType=VARCHAR},
+		#{omSort,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.circle.entity.OTHER_MESSAGE">
+		insert into OTHER_MESSAGE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="omId != null">
+				OM_ID,
+			</if>
+			<if test="omTitle != null">
+				OM_TITLE,
+			</if>
+			<if test="omTypeid != null">
+				OM_TYPEID,
+			</if>
+			<if test="omContent != null">
+				OM_CONTENT,
+			</if>
+			<if test="omDate != null">
+				OM_DATE,
+			</if>
+			<if test="omSort != null">
+				OM_SORT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="omId != null">
+				#{omId,jdbcType=INTEGER},
+			</if>
+			<if test="omTitle != null">
+				#{omTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="omTypeid != null">
+				#{omTypeid,jdbcType=INTEGER},
+			</if>
+			<if test="omContent != null">
+				#{omContent,jdbcType=VARCHAR},
+			</if>
+			<if test="omDate != null">
+				#{omDate,jdbcType=VARCHAR},
+			</if>
+			<if test="omSort != null">
+				#{omSort,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.OTHER_MESSAGE">
+		update OTHER_MESSAGE
+		<set>
+			<if test="omTitle != null">
+				OM_TITLE = #{omTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="omTypeid != null">
+				OM_TYPEID = #{omTypeid,jdbcType=INTEGER},
+			</if>
+			<if test="omContent != null">
+				OM_CONTENT = #{omContent,jdbcType=VARCHAR},
+			</if>
+			<if test="omDate != null">
+				OM_DATE = #{omDate,jdbcType=VARCHAR},
+			</if>
+			<if test="omSort != null">
+				OM_SORT = #{omSort,jdbcType=INTEGER},
+			</if>
+		</set>
+		where OM_ID = #{omId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.circle.entity.OTHER_MESSAGE">
+		update
+		OTHER_MESSAGE
+		set OM_TITLE = #{omTitle,jdbcType=VARCHAR},
+		OM_TYPEID =
+		#{omTypeid,jdbcType=INTEGER},
+		OM_CONTENT =
+		#{omContent,jdbcType=VARCHAR},
+		OM_DATE = #{omDate,jdbcType=VARCHAR},
+		OM_SORT = #{omSort,jdbcType=INTEGER}
+		where OM_ID =
+		#{omId,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.circle.mapper.PROJECT_MESSAGEMapper">
+	<resultMap id="BaseResultMap" type="com.circle.entity.PROJECT_MESSAGE">
+		<id column="PM_ID" property="pmId" jdbcType="INTEGER" />
+		<result column="PM_SORT" property="pmSort" jdbcType="INTEGER" />
+		<result column="PM_JOB" property="pmJob" jdbcType="VARCHAR" />
+		<result column="PM_ADDRESS" property="pmAddress" jdbcType="VARCHAR" />
+		<result column="PM_TYPE" property="pmType" jdbcType="VARCHAR" />
+		<result column="PM_MONEY" property="pmMoney" jdbcType="VARCHAR" />
+		<result column="PM_TITLE" property="pmTitle" jdbcType="VARCHAR" />
+		<result column="PM_NUM" property="pmNum" jdbcType="INTEGER" />
+		<result column="PM_DATE" property="pmDate" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<sql id="Base_Column_List">
+		PM_ID, PM_SORT, PM_JOB, PM_ADDRESS, PM_TYPE, PM_MONEY,
+		PM_TITLE, PM_NUM,
+		PM_DATE
+	</sql>
+
+	<!-- List<PROJECT_MESSAGE> queryall(Map<String, Object> m); -->
+	<select id="queryall" statementType="CALLABLE" resultMap="BaseResultMap">
+		EXEC
+		prc_PageResult
+		#{currPage},'
+		<include refid="Base_Column_List" />
+		','PROJECT_MESSAGE','','PM_ID','0','PM_ID','10'
+
+	</select>
+	<select id="count" resultType="java.lang.Integer">
+		exec proc_count 'PROJECT_MESSAGE'
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from PROJECT_MESSAGE
+		where PM_ID = #{pmId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		PROJECT_MESSAGE
+		where PM_ID = #{pmId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.circle.entity.PROJECT_MESSAGE">
+		insert into PROJECT_MESSAGE (
+		PM_SORT, PM_JOB,
+		PM_ADDRESS, PM_TYPE, PM_MONEY,
+		PM_TITLE, PM_NUM,
+		PM_DATE
+		)
+		values ( #{pmSort,jdbcType=INTEGER},
+		#{pmJob,jdbcType=VARCHAR},
+		#{pmAddress,jdbcType=VARCHAR},
+		#{pmType,jdbcType=VARCHAR},
+		#{pmMoney,jdbcType=VARCHAR},
+		#{pmTitle,jdbcType=VARCHAR}, #{pmNum,jdbcType=INTEGER},
+		#{pmDate,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.circle.entity.PROJECT_MESSAGE">
+		insert into PROJECT_MESSAGE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pmId != null">
+				PM_ID,
+			</if>
+			<if test="pmSort != null">
+				PM_SORT,
+			</if>
+			<if test="pmJob != null">
+				PM_JOB,
+			</if>
+			<if test="pmAddress != null">
+				PM_ADDRESS,
+			</if>
+			<if test="pmType != null">
+				PM_TYPE,
+			</if>
+			<if test="pmMoney != null">
+				PM_MONEY,
+			</if>
+			<if test="pmTitle != null">
+				PM_TITLE,
+			</if>
+			<if test="pmNum != null">
+				PM_NUM,
+			</if>
+			<if test="pmDate != null">
+				PM_DATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pmId != null">
+				#{pmId,jdbcType=INTEGER},
+			</if>
+			<if test="pmSort != null">
+				#{pmSort,jdbcType=INTEGER},
+			</if>
+			<if test="pmJob != null">
+				#{pmJob,jdbcType=VARCHAR},
+			</if>
+			<if test="pmAddress != null">
+				#{pmAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="pmType != null">
+				#{pmType,jdbcType=VARCHAR},
+			</if>
+			<if test="pmMoney != null">
+				#{pmMoney,jdbcType=VARCHAR},
+			</if>
+			<if test="pmTitle != null">
+				#{pmTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="pmNum != null">
+				#{pmNum,jdbcType=INTEGER},
+			</if>
+			<if test="pmDate != null">
+				#{pmDate,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.PROJECT_MESSAGE">
+		update PROJECT_MESSAGE
+		<set>
+			<if test="pmSort != null">
+				PM_SORT = #{pmSort,jdbcType=INTEGER},
+			</if>
+			<if test="pmJob != null">
+				PM_JOB = #{pmJob,jdbcType=VARCHAR},
+			</if>
+			<if test="pmAddress != null">
+				PM_ADDRESS = #{pmAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="pmType != null">
+				PM_TYPE = #{pmType,jdbcType=VARCHAR},
+			</if>
+			<if test="pmMoney != null">
+				PM_MONEY = #{pmMoney,jdbcType=VARCHAR},
+			</if>
+			<if test="pmTitle != null">
+				PM_TITLE = #{pmTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="pmNum != null">
+				PM_NUM = #{pmNum,jdbcType=INTEGER},
+			</if>
+			<if test="pmDate != null">
+				PM_DATE = #{pmDate,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where PM_ID = #{pmId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.circle.entity.PROJECT_MESSAGE">
+		update
+		PROJECT_MESSAGE
+		set PM_SORT = #{pmSort,jdbcType=INTEGER},
+		PM_JOB =
+		#{pmJob,jdbcType=VARCHAR},
+		PM_ADDRESS = #{pmAddress,jdbcType=VARCHAR},
+		PM_TYPE = #{pmType,jdbcType=VARCHAR},
+		PM_MONEY =
+		#{pmMoney,jdbcType=VARCHAR},
+		PM_TITLE = #{pmTitle,jdbcType=VARCHAR},
+		PM_NUM = #{pmNum,jdbcType=INTEGER},
+		PM_DATE =
+		#{pmDate,jdbcType=VARCHAR}
+		where PM_ID = #{pmId,jdbcType=INTEGER}
+	</update>
+</mapper>

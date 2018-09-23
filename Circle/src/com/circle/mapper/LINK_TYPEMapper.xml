@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.circle.mapper.LINK_TYPEMapper">
+	<resultMap id="BaseResultMap" type="com.circle.entity.LINK_TYPE">
+		<id column="LT_ID" property="ltId" jdbcType="INTEGER" />
+		<result column="LT_SORT" property="ltSort" jdbcType="INTEGER" />
+		<result column="LT_NMAE" property="ltNmae" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		LT_ID, LT_SORT, LT_NMAE
+	</sql>
+	<!-- List<LINK_TYPE> queryAll(); -->
+	<select id="queryAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from LINK_TYPE
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from LINK_TYPE
+		where LT_ID = #{ltId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		LINK_TYPE
+		where LT_ID = #{ltId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.circle.entity.LINK_TYPE">
+		insert into LINK_TYPE (
+		LT_SORT, LT_NMAE
+		)
+		values (
+		#{ltSort,jdbcType=INTEGER},
+		#{ltNmae,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.circle.entity.LINK_TYPE">
+		insert into LINK_TYPE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ltId != null">
+				LT_ID,
+			</if>
+			<if test="ltSort != null">
+				LT_SORT,
+			</if>
+			<if test="ltNmae != null">
+				LT_NMAE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ltId != null">
+				#{ltId,jdbcType=INTEGER},
+			</if>
+			<if test="ltSort != null">
+				#{ltSort,jdbcType=INTEGER},
+			</if>
+			<if test="ltNmae != null">
+				#{ltNmae,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.LINK_TYPE">
+		update LINK_TYPE
+		<set>
+			<if test="ltSort != null">
+				LT_SORT = #{ltSort,jdbcType=INTEGER},
+			</if>
+			<if test="ltNmae != null">
+				LT_NMAE = #{ltNmae,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where LT_ID = #{ltId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.circle.entity.LINK_TYPE">
+		update LINK_TYPE
+		set LT_SORT = #{ltSort,jdbcType=INTEGER},
+		LT_NMAE =
+		#{ltNmae,jdbcType=VARCHAR}
+		where LT_ID = #{ltId,jdbcType=INTEGER}
+	</update>
+</mapper>

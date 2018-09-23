@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.circle.mapper.CapitalTypeMapper">
+	<resultMap id="BaseResultMap" type="com.circle.entity.CapitalType">
+		<id column="cc_id" property="ccId" jdbcType="INTEGER" />
+		<result column="cc_desc" property="ccDesc" jdbcType="INTEGER" />
+		<result column="cc_name" property="ccName" jdbcType="VARCHAR" />
+		<result column="cc_parent_id" property="ccParentId" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		cc_id, cc_desc, cc_name, cc_parent_id
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from capital_category
+		where cc_id = #{ccId,jdbcType=INTEGER}
+	</select>
+
+	<!-- List<Capital> querybigtype(); -->
+	<select id="querybigtype" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from capital_category
+		where cc_parent_id = 0 order by cc_desc
+	</select>
+
+
+	<!-- List<Capital> querysmalltype(); -->
+	<select id="querysmalltype" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from capital_category
+		where cc_parent_id != 0 order by cc_desc
+	</select>
+
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		capital_category
+		where cc_id = #{ccId,jdbcType=INTEGER}  or cc_parent_id =#{ccParentId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.circle.entity.CapitalType">
+		insert into capital_category
+		( cc_desc, cc_name,
+		cc_parent_id)
+		values
+		( #{ccDesc,jdbcType=INTEGER},
+		#{ccName,jdbcType=VARCHAR},
+		#{ccParentId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.circle.entity.CapitalType">
+		insert into capital_category
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ccId != null">
+				cc_id,
+			</if>
+			<if test="ccDesc != null">
+				cc_desc,
+			</if>
+			<if test="ccName != null">
+				cc_name,
+			</if>
+			<if test="ccParentId != null">
+				cc_parent_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ccId != null">
+				#{ccId,jdbcType=INTEGER},
+			</if>
+			<if test="ccDesc != null">
+				#{ccDesc,jdbcType=INTEGER},
+			</if>
+			<if test="ccName != null">
+				#{ccName,jdbcType=VARCHAR},
+			</if>
+			<if test="ccParentId != null">
+				#{ccParentId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.CapitalType">
+		update capital_category
+		<set>
+			<if test="ccDesc != null">
+				cc_desc = #{ccDesc,jdbcType=INTEGER},
+			</if>
+			<if test="ccName != null">
+				cc_name = #{ccName,jdbcType=VARCHAR},
+			</if>
+			<if test="ccParentId != null">
+				cc_parent_id = #{ccParentId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where cc_id = #{ccId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.circle.entity.CapitalType">
+		update
+		capital_category
+		set cc_desc = #{ccDesc,jdbcType=INTEGER},
+		cc_name =
+		#{ccName,jdbcType=VARCHAR},
+		cc_parent_id =
+		#{ccParentId,jdbcType=INTEGER}
+		where cc_id = #{ccId,jdbcType=INTEGER}
+	</update>
+</mapper>

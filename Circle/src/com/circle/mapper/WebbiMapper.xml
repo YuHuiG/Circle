@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.circle.mapper.WebbiMapper" >
+  <resultMap id="BaseResultMap" type="com.circle.entity.Webbi" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="webname" property="webname" jdbcType="VARCHAR" />
+    <result column="servicephone" property="servicephone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="microblog" property="microblog" jdbcType="VARCHAR" />
+    <result column="complainthotline" property="complainthotline" jdbcType="VARCHAR" />
+    <result column="qrcode" property="qrcode" jdbcType="VARCHAR" />
+    <result column="enrollment" property="enrollment" jdbcType="INTEGER" />
+    <result column="amounts" property="amounts" jdbcType="DOUBLE" />
+    <result column="Investorsearn" property="investorsearn" jdbcType="DOUBLE" />
+    <result column="Websiteopeningdate" property="websiteopeningdate" jdbcType="VARCHAR" />
+    <result column="copyright" property="copyright" jdbcType="VARCHAR" />
+    <result column="antistop" property="antistop" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, webname, servicephone, email, microblog, complainthotline, qrcode, enrollment, 
+    amounts, Investorsearn, Websiteopeningdate, copyright, antistop, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Webbi
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Webbi
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.circle.entity.Webbi" >
+    insert into Webbi ( webname, servicephone, 
+      email, microblog, complainthotline, 
+      qrcode, enrollment, amounts, 
+      Investorsearn, Websiteopeningdate, copyright, 
+      antistop, description)
+    values ( #{webname,jdbcType=VARCHAR}, #{servicephone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{microblog,jdbcType=VARCHAR}, #{complainthotline,jdbcType=VARCHAR}, 
+      #{qrcode,jdbcType=VARCHAR}, #{enrollment,jdbcType=INTEGER}, #{amounts,jdbcType=DOUBLE}, 
+      #{investorsearn,jdbcType=DOUBLE}, #{websiteopeningdate,jdbcType=VARCHAR}, #{copyright,jdbcType=VARCHAR}, 
+      #{antistop,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.circle.entity.Webbi" >
+    insert into Webbi
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      
+      <if test="webname != null" >
+        webname,
+      </if>
+      <if test="servicephone != null" >
+        servicephone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="microblog != null" >
+        microblog,
+      </if>
+      <if test="complainthotline != null" >
+        complainthotline,
+      </if>
+      <if test="qrcode != null" >
+        qrcode,
+      </if>
+      <if test="enrollment != null" >
+        enrollment,
+      </if>
+      <if test="amounts != null" >
+        amounts,
+      </if>
+      <if test="investorsearn != null" >
+        Investorsearn,
+      </if>
+      <if test="websiteopeningdate != null" >
+        Websiteopeningdate,
+      </if>
+      <if test="copyright != null" >
+        copyright,
+      </if>
+      <if test="antistop != null" >
+        antistop,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="webname != null" >
+        #{webname,jdbcType=VARCHAR},
+      </if>
+      <if test="servicephone != null" >
+        #{servicephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="microblog != null" >
+        #{microblog,jdbcType=VARCHAR},
+      </if>
+      <if test="complainthotline != null" >
+        #{complainthotline,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcode != null" >
+        #{qrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="enrollment != null" >
+        #{enrollment,jdbcType=INTEGER},
+      </if>
+      <if test="amounts != null" >
+        #{amounts,jdbcType=DOUBLE},
+      </if>
+      <if test="investorsearn != null" >
+        #{investorsearn,jdbcType=DOUBLE},
+      </if>
+      <if test="websiteopeningdate != null" >
+        #{websiteopeningdate,jdbcType=VARCHAR},
+      </if>
+      <if test="copyright != null" >
+        #{copyright,jdbcType=VARCHAR},
+      </if>
+      <if test="antistop != null" >
+        #{antistop,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.Webbi" >
+    update Webbi
+    <set >
+      <if test="webname != null" >
+        webname = #{webname,jdbcType=VARCHAR},
+      </if>
+      <if test="servicephone != null" >
+        servicephone = #{servicephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="microblog != null" >
+        microblog = #{microblog,jdbcType=VARCHAR},
+      </if>
+      <if test="complainthotline != null" >
+        complainthotline = #{complainthotline,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcode != null" >
+        qrcode = #{qrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="enrollment != null" >
+        enrollment = #{enrollment,jdbcType=INTEGER},
+      </if>
+      <if test="amounts != null" >
+        amounts = #{amounts,jdbcType=DOUBLE},
+      </if>
+      <if test="investorsearn != null" >
+        Investorsearn = #{investorsearn,jdbcType=DOUBLE},
+      </if>
+      <if test="websiteopeningdate != null" >
+        Websiteopeningdate = #{websiteopeningdate,jdbcType=VARCHAR},
+      </if>
+      <if test="copyright != null" >
+        copyright = #{copyright,jdbcType=VARCHAR},
+      </if>
+      <if test="antistop != null" >
+        antistop = #{antistop,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.circle.entity.Webbi" >
+    update Webbi
+    set webname = #{webname,jdbcType=VARCHAR},
+      servicephone = #{servicephone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      microblog = #{microblog,jdbcType=VARCHAR},
+      complainthotline = #{complainthotline,jdbcType=VARCHAR},
+      qrcode = #{qrcode,jdbcType=VARCHAR},
+      enrollment = #{enrollment,jdbcType=INTEGER},
+      amounts = #{amounts,jdbcType=DOUBLE},
+      Investorsearn = #{investorsearn,jdbcType=DOUBLE},
+      Websiteopeningdate = #{websiteopeningdate,jdbcType=VARCHAR},
+      copyright = #{copyright,jdbcType=VARCHAR},
+      antistop = #{antistop,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
