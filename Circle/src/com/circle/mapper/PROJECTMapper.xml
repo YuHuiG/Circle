@@ -13,30 +13,30 @@
 
 	<!-- List<PROJECT> Sprojectlist(); -->
 	<select id="Sprojectlist" resultMap="BaseResultMap">
-		select * from PROJECT where
+		select * from project where
 		P_IDS = 0
 	</select>
 
 
 	<!-- List<PROJECT> Bprojectlist(); -->
 	<select id="Bprojectlist" resultMap="BaseResultMap">
-		select * from PROJECT where
+		select * from project where
 		P_IDS != 0
 	</select>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from PROJECT
+		from project
 		where P_ID = #{pId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
-		PROJECT
+		project
 		where P_ID = #{pId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.circle.entity.PROJECT">
-		insert into PROJECT (
+		insert into project (
 		P_SORT,
 		P_NAME,
 		P_IDS)
@@ -46,7 +46,7 @@
 		#{pIds,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective" parameterType="com.circle.entity.PROJECT">
-		insert into PROJECT
+		insert into project
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="pId != null">
 				P_ID,
@@ -77,7 +77,7 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.PROJECT">
-		update PROJECT
+		update project
 		<set>
 			<if test="pSort != null">
 				P_SORT = #{pSort,jdbcType=INTEGER},
@@ -92,7 +92,7 @@
 		where P_ID = #{pId,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.circle.entity.PROJECT">
-		update PROJECT
+		update project
 		set
 		P_SORT = #{pSort,jdbcType=INTEGER},
 		P_NAME = #{pName,jdbcType=VARCHAR},

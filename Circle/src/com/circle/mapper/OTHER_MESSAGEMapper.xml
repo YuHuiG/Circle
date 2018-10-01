@@ -16,30 +16,32 @@
 
 	<!-- int count(); -->
 	<select id="count" resultType="java.lang.Integer">
-		exec proc_count 'OTHER_MESSAGE'
+		select count(*) from other_message
+		<!-- exec proc_count 'OTHER_MESSAGE' -->
 	</select>
 	<!-- List<OTHER_MESSAGE> queryall(Map<String, Object> m); -->
 	<select id="queryall" statementType="CALLABLE" resultMap="BaseResultMap">
-		EXEC
+		select * from other_message limit #{currPage},10
+		<!-- EXEC
 		prc_PageResult
 		#{currPage},'
 		<include refid="Base_Column_List" />
-		','OTHER_MESSAGE','','OM_ID','0','OM_ID','10'
+		','OTHER_MESSAGE','','OM_ID','0','OM_ID','10' -->
 	</select>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from OTHER_MESSAGE
+		from other_message
 		where OM_ID = #{omId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
-		OTHER_MESSAGE
+		other_message
 		where OM_ID = #{omId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.circle.entity.OTHER_MESSAGE">
-		insert into OTHER_MESSAGE
+		insert into other_message
 		(
 		OM_TITLE, OM_TYPEID,
 		OM_CONTENT, OM_DATE, OM_SORT
@@ -54,7 +56,7 @@
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.circle.entity.OTHER_MESSAGE">
-		insert into OTHER_MESSAGE
+		insert into other_message
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="omId != null">
 				OM_ID,
@@ -97,7 +99,7 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.OTHER_MESSAGE">
-		update OTHER_MESSAGE
+		update other_message
 		<set>
 			<if test="omTitle != null">
 				OM_TITLE = #{omTitle,jdbcType=VARCHAR},
@@ -119,7 +121,7 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.circle.entity.OTHER_MESSAGE">
 		update
-		OTHER_MESSAGE
+		other_message
 		set OM_TITLE = #{omTitle,jdbcType=VARCHAR},
 		OM_TYPEID =
 		#{omTypeid,jdbcType=INTEGER},

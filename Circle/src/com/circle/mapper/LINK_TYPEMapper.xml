@@ -13,22 +13,22 @@
 	<select id="queryAll" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from LINK_TYPE
+		from link_type
 	</select>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from LINK_TYPE
+		from link_type
 		where LT_ID = #{ltId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
-		LINK_TYPE
+		link_type
 		where LT_ID = #{ltId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.circle.entity.LINK_TYPE">
-		insert into LINK_TYPE (
+		insert into link_type (
 		LT_SORT, LT_NMAE
 		)
 		values (
@@ -37,7 +37,7 @@
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.circle.entity.LINK_TYPE">
-		insert into LINK_TYPE
+		insert into link_type
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="ltId != null">
 				LT_ID,
@@ -74,7 +74,7 @@
 		where LT_ID = #{ltId,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.circle.entity.LINK_TYPE">
-		update LINK_TYPE
+		update link_type
 		set LT_SORT = #{ltSort,jdbcType=INTEGER},
 		LT_NMAE =
 		#{ltNmae,jdbcType=VARCHAR}

@@ -56,14 +56,16 @@
 	</select>
 	<!-- List<Capital> queryall(Map<String, Object> m); -->
 	<select id="queryall" statementType="CALLABLE" resultMap="BaseResultMap">
-		EXEC
+	select * from capital limit #{currPage},10
+<!-- 		EXEC
 		prc_PageResult
 		#{currPage},'
 		<include refid="Base_Column_List" />
-		','capital','','cap_id','0','cap_id','10'
+		','capital','','cap_id','0','cap_id','10' -->
 	</select>
 	<select id="count" resultType="java.lang.Integer">
-		exec proc_count 'capital'
+	select count(*) from capital
+		<!-- exec proc_count 'capital' -->
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from

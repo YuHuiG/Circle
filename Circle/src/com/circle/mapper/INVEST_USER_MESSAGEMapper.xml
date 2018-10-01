@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.circle.mapper.INVEST_USER_MESSAGEMapper">
-	<resultMap id="BaseResultMap" type="com.circle.entity.INVEST_USER_MESSAGE">
+	<resultMap id="BaseResultMap"
+		type="com.circle.entity.INVEST_USER_MESSAGE">
 		<id column="IUM_ID" property="iumId" jdbcType="INTEGER" />
 		<result column="IUM_NAME" property="iumName" jdbcType="VARCHAR" />
-		<result column="IUM_SUBHEAD" property="iumSubhead" jdbcType="VARCHAR" />
+		<result column="IUM_SUBHEAD" property="iumSubhead"
+			jdbcType="VARCHAR" />
 		<result column="IUM_HEAD" property="iumHead" jdbcType="VARCHAR" />
 		<result column="IUM_INVESTSTAGE" property="iumInveststage"
 			jdbcType="VARCHAR" />
 		<result column="IUM_INVESTMETHOD" property="iumInvestmethod"
 			jdbcType="VARCHAR" />
 		<result column="IUM_AREA" property="iumArea" jdbcType="VARCHAR" />
-		<result column="IUM_APPOINTMENTAREA" property="iumAppointmentarea"
+		<result column="IUM_APPOINTMENTAREA"
+			property="iumAppointmentarea" jdbcType="VARCHAR" />
+		<result column="IUM_MONEY" property="iumMoney"
+			jdbcType="DECIMAL" />
+		<result column="IUM_BRIEF" property="iumBrief"
 			jdbcType="VARCHAR" />
-		<result column="IUM_MONEY" property="iumMoney" jdbcType="DECIMAL" />
-		<result column="IUM_BRIEF" property="iumBrief" jdbcType="VARCHAR" />
-		<result column="IUM_CASETEXT" property="iumCasetext" jdbcType="VARCHAR" />
-		<result column="IUM_FIELD" property="iumField" jdbcType="VARCHAR" />
-		<result column="IUM_DETAIL" property="iumDetail" jdbcType="VARCHAR" />
+		<result column="IUM_CASETEXT" property="iumCasetext"
+			jdbcType="VARCHAR" />
+		<result column="IUM_FIELD" property="iumField"
+			jdbcType="VARCHAR" />
+		<result column="IUM_DETAIL" property="iumDetail"
+			jdbcType="VARCHAR" />
 		<result column="IUM_NUM" property="iumNum" jdbcType="INTEGER" />
 		<result column="IUM_SORT" property="iumSort" jdbcType="INTEGER" />
 		<result column="IT_ID" property="itId" jdbcType="INTEGER" />
@@ -32,19 +39,19 @@
 	</sql>
 
 	<!-- List<INVEST_USER_MESSAGE> queryall(Map<String, Object> m); -->
-	<select id="queryall" statementType="CALLABLE" resultMap="BaseResultMap">
-		EXEC
-		prc_PageResult
-		#{currPage},'
-		<include refid="Base_Column_List" />
-		','INVEST_USER_MESSAGE','','IUM_ID','0','IUM_ID','10'
+	<select id="queryall" statementType="CALLABLE"
+		resultMap="BaseResultMap">
+		select * from INVEST_USER_MESSAGE limit #{currPage},10
+		<!-- EXEC prc_PageResult #{currPage},' <include refid="Base_Column_List" 
+			/> ','INVEST_USER_MESSAGE','','IUM_ID','0','IUM_ID','10' -->
 
 
 	</select>
 
 	<!-- int count(); -->
 	<select id="count" resultType="java.lang.Integer">
-		exec proc_count 'INVEST_USER_MESSAGE'
+		select count(*) from INVEST_USER_MESSAGE
+		<!-- exec proc_count 'INVEST_USER_MESSAGE' -->
 	</select>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
@@ -54,17 +61,21 @@
 		from INVEST_USER_MESSAGE
 		where IUM_ID = #{iumId,jdbcType=INTEGER}
 	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
 		delete from
 		INVEST_USER_MESSAGE
-		where IUM_ID = #{iumId,jdbcType=INTEGER}
+		where IUM_ID =
+		#{iumId,jdbcType=INTEGER}
 	</delete>
-	<insert id="insert" parameterType="com.circle.entity.INVEST_USER_MESSAGE">
+	<insert id="insert"
+		parameterType="com.circle.entity.INVEST_USER_MESSAGE">
 		insert into
 		INVEST_USER_MESSAGE (IUM_NAME, IUM_SUBHEAD,
 		IUM_HEAD, IUM_INVESTSTAGE,
 		IUM_INVESTMETHOD,
-		IUM_AREA, IUM_APPOINTMENTAREA, IUM_MONEY,
+		IUM_AREA,
+		IUM_APPOINTMENTAREA, IUM_MONEY,
 		IUM_BRIEF,
 		IUM_CASETEXT, IUM_FIELD,
 		IUM_DETAIL, IUM_NUM, IUM_SORT,
@@ -81,7 +92,8 @@
 		#{iumNum,jdbcType=INTEGER}, #{iumSort,jdbcType=INTEGER},
 		2)
 	</insert>
-	<insert id="insertSelective" parameterType="com.circle.entity.INVEST_USER_MESSAGE">
+	<insert id="insertSelective"
+		parameterType="com.circle.entity.INVEST_USER_MESSAGE">
 		insert into INVEST_USER_MESSAGE
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="iumId != null">
@@ -184,7 +196,8 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.INVEST_USER_MESSAGE">
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.circle.entity.INVEST_USER_MESSAGE">
 		update INVEST_USER_MESSAGE
 		<set>
 			<if test="iumName != null">
@@ -236,11 +249,14 @@
 		</set>
 		where IUM_ID = #{iumId,jdbcType=INTEGER}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.circle.entity.INVEST_USER_MESSAGE">
+	<update id="updateByPrimaryKey"
+		parameterType="com.circle.entity.INVEST_USER_MESSAGE">
 		update
 		INVEST_USER_MESSAGE
-		set IUM_NAME = #{iumName,jdbcType=VARCHAR},
-		IUM_SUBHEAD = #{iumSubhead,jdbcType=VARCHAR},
+		set IUM_NAME =
+		#{iumName,jdbcType=VARCHAR},
+		IUM_SUBHEAD =
+		#{iumSubhead,jdbcType=VARCHAR},
 		IUM_HEAD =
 		#{iumHead,jdbcType=VARCHAR},
 		IUM_INVESTSTAGE =

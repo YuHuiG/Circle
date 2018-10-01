@@ -30,21 +30,23 @@
 	</sql>
 	<select id="selecttypeName" resultType="INVEST_TYPE"
 		parameterType="java.lang.Integer">
-		select * from INVEST_TYPE where  IT_ID = #{itId,jdbcType=INTEGER}
+		select * from invest_type where  IT_ID = #{itId,jdbcType=INTEGER}
 	</select>
 
 	<!-- int count(); -->
 	<select id="count" resultType="java.lang.Integer">
-		exec proc_count 'INVEST_MESSAGE'
+	select count(*) from invest_message
+		<!-- exec proc_count 'INVEST_MESSAGE' -->
 	</select>
 
 	<!-- List<INVEST_MESSAGE> queryall(Map<String, Object> m); -->
 	<select id="queryall" statementType="CALLABLE" resultMap="BaseResultMap">
-		EXEC
+		select * from invest_message limit #{currPage},10
+<!-- 		EXEC
 		prc_PageResult
 		#{currPage},'
 		<include refid="Base_Column_List" />
-		','INVEST_MESSAGE','','IM_ID','0','IM_ID','10'
+		','INVEST_MESSAGE','','IM_ID','0','IM_ID','10' -->
 	</select>
 
 
@@ -52,16 +54,16 @@
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from INVEST_MESSAGE
+		from invest_message
 		where IM_ID = #{imId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
-		INVEST_MESSAGE
+		invest_message
 		where IM_ID = #{imId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.circle.entity.INVEST_MESSAGE">
-		insert into INVEST_MESSAGE
+		insert into invest_message
 		(IM_NAME, IT_ID,
 		IM_LOGO, IM_INVESTSTAGE, IM_INVESTFIELD,
 		IM_BRIEF,
@@ -79,7 +81,7 @@
 		#{imSort,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective" parameterType="com.circle.entity.INVEST_MESSAGE">
-		insert into INVEST_MESSAGE
+		insert into invest_message
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="imId != null">
 				IM_ID,
@@ -207,7 +209,7 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.circle.entity.INVEST_MESSAGE">
 		update
-		INVEST_MESSAGE
+		invest_message
 		set IM_NAME = #{imName,jdbcType=VARCHAR},
 		IT_ID =
 		#{itId,jdbcType=INTEGER},

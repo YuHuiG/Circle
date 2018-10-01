@@ -23,16 +23,16 @@
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    <include refid="Base_Column_List" />
-    from Webbi
+    *
+    from webbi
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from Webbi
+    delete from webbi
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.circle.entity.Webbi" >
-    insert into Webbi ( webname, servicephone, 
+    insert into webbi ( webname, servicephone, 
       email, microblog, complainthotline, 
       qrcode, enrollment, amounts, 
       Investorsearn, Websiteopeningdate, copyright, 
@@ -44,7 +44,7 @@
       #{antistop,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.circle.entity.Webbi" >
-    insert into Webbi
+    insert into webbi
     <trim prefix="(" suffix=")" suffixOverrides="," >
       
       <if test="webname != null" >
@@ -133,7 +133,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.Webbi" >
-    update Webbi
+    update webbi
     <set >
       <if test="webname != null" >
         webname = #{webname,jdbcType=VARCHAR},
@@ -178,7 +178,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.circle.entity.Webbi" >
-    update Webbi
+    update webbi
     set webname = #{webname,jdbcType=VARCHAR},
       servicephone = #{servicephone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

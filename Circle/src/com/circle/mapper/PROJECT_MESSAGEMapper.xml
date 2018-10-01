@@ -22,30 +22,32 @@
 
 	<!-- List<PROJECT_MESSAGE> queryall(Map<String, Object> m); -->
 	<select id="queryall" statementType="CALLABLE" resultMap="BaseResultMap">
-		EXEC
+		select * from project_message limit #{currPage},10
+<!-- 		EXEC
 		prc_PageResult
 		#{currPage},'
 		<include refid="Base_Column_List" />
-		','PROJECT_MESSAGE','','PM_ID','0','PM_ID','10'
+		','PROJECT_MESSAGE','','PM_ID','0','PM_ID','10' -->
 
 	</select>
 	<select id="count" resultType="java.lang.Integer">
-		exec proc_count 'PROJECT_MESSAGE'
+		select count(*) from project_message
+		<!-- exec proc_count 'PROJECT_MESSAGE' -->
 	</select>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from PROJECT_MESSAGE
+		from project_message
 		where PM_ID = #{pmId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
-		PROJECT_MESSAGE
+		project_message
 		where PM_ID = #{pmId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.circle.entity.PROJECT_MESSAGE">
-		insert into PROJECT_MESSAGE (
+		insert into project_message (
 		PM_SORT, PM_JOB,
 		PM_ADDRESS, PM_TYPE, PM_MONEY,
 		PM_TITLE, PM_NUM,
@@ -61,7 +63,7 @@
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.circle.entity.PROJECT_MESSAGE">
-		insert into PROJECT_MESSAGE
+		insert into project_message
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="pmId != null">
 				PM_ID,
@@ -122,7 +124,7 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.PROJECT_MESSAGE">
-		update PROJECT_MESSAGE
+		update project_message
 		<set>
 			<if test="pmSort != null">
 				PM_SORT = #{pmSort,jdbcType=INTEGER},
@@ -153,7 +155,7 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.circle.entity.PROJECT_MESSAGE">
 		update
-		PROJECT_MESSAGE
+		project_message
 		set PM_SORT = #{pmSort,jdbcType=INTEGER},
 		PM_JOB =
 		#{pmJob,jdbcType=VARCHAR},

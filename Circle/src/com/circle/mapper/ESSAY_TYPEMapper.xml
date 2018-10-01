@@ -14,7 +14,7 @@
 	<select id="Stypelist" resultMap="BaseResultMap">
 		select
 		*
-		from ESSAY_TYPE
+		from essay_type
 		where
 		ET_IDS = 0
 	</select>
@@ -22,7 +22,7 @@
 	<select id="Btypelist" resultMap="BaseResultMap">
 		select
 		*
-		from ESSAY_TYPE
+		from essay_type
 		where
 		ET_IDS != 0
 	</select>
@@ -30,16 +30,16 @@
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from ESSAY_TYPE
+		from essay_type
 		where ET_ID = #{etId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
-		ESSAY_TYPE
+		essay_type
 		where ET_ID = #{etId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.circle.entity.ESSAY_TYPE">
-		insert into ESSAY_TYPE ( 
+		insert into essay_type ( 
 		ET_SORT, ET_NAME,
 		ET_IDS)
 		values ( 
@@ -48,7 +48,7 @@
 		#{etIds,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective" parameterType="com.circle.entity.ESSAY_TYPE">
-		insert into ESSAY_TYPE
+		insert into essay_type
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="etId != null">
 				ET_ID,
@@ -79,7 +79,7 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.ESSAY_TYPE">
-		update ESSAY_TYPE
+		update essay_type
 		<set>
 			<if test="etSort != null">
 				ET_SORT = #{etSort,jdbcType=INTEGER},
@@ -94,7 +94,7 @@
 		where ET_ID = #{etId,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.circle.entity.ESSAY_TYPE">
-		update ESSAY_TYPE
+		update essay_type
 		set ET_SORT = #{etSort,jdbcType=INTEGER},
 		ET_NAME =
 		#{etName,jdbcType=VARCHAR},

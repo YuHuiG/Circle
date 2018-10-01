@@ -8,13 +8,14 @@
 		<result column="reclog" property="reclog" jdbcType="VARCHAR" />
 		<result column="ip" property="ip" jdbcType="VARCHAR" />
 		<result column="addr" property="addr" jdbcType="VARCHAR" />
-	</resultMap> 
+	</resultMap>
 	<sql id="Base_Column_List">
 		id,name,pwd,reclog,ip,addr
 	</sql>
 	<select id="login" parameterType="Users" resultType="Users">
 		select *
-		from users where name=#{name,jdbcType=VARCHAR} and pwd=#{pwd,jdbcType=VARCHAR}
+		from users where name=#{name,jdbcType=VARCHAR} and
+		pwd=#{pwd,jdbcType=VARCHAR}
 	</select>
 	<select id="queryid" parameterType="Users" resultType="Users">
 		select
@@ -22,13 +23,14 @@
 		from users where id=#{id,jdbcType=INTEGER}
 	</select>
 
-	<select id="queryAll" statementType="CALLABLE" resultMap="BaseResultMap">
-		EXEC
-		prc_PageResult
-		#{currPage},'id,name,pwd,reclog,ip,addr','users','','id','0','id','3'
+	<select id="queryAll" statementType="CALLABLE"
+		resultMap="BaseResultMap">
+		select * from users limit #{currPage},10
+		<!-- EXEC prc_PageResult #{currPage},'id,name,pwd,reclog,ip,addr','users','','id','0','id','3' -->
 	</select>
 	<select id="count" resultType="java.lang.Integer">
-		exec proc_count 'users'
+		select count(*) from users
+		<!-- exec proc_count 'users' -->
 	</select>
 	<update id="update" parameterType="com.circle.entity.Users">
 		update users set

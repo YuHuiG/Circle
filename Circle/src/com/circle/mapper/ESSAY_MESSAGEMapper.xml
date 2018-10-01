@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.circle.mapper.ESSAY_MESSAGEMapper">
-	<resultMap id="BaseResultMap" type="com.circle.entity.ESSAY_MESSAGE">
+	<resultMap id="BaseResultMap"
+		type="com.circle.entity.ESSAY_MESSAGE">
 		<id column="EM_ID" property="emId" jdbcType="INTEGER" />
 		<result column="EM_TITLE" property="emTitle" jdbcType="VARCHAR" />
 		<result column="EM_SORT" property="emSort" jdbcType="INTEGER" />
 		<result column="EM_JOB" property="emJob" jdbcType="INTEGER" />
 		<result column="EM_JOBS" property="emJobs" jdbcType="VARCHAR" />
 		<result column="EM_IMG" property="emImg" jdbcType="VARCHAR" />
-		<result column="EM_SOURCE" property="emSource" jdbcType="VARCHAR" />
+		<result column="EM_SOURCE" property="emSource"
+			jdbcType="VARCHAR" />
 		<result column="EM_DATE" property="emDate" jdbcType="TIMESTAMP" />
 		<result column="EM_BRIEF" property="emBrief" jdbcType="VARCHAR" />
 		<result column="EM_LABLE" property="emLable" jdbcType="VARCHAR" />
-		<result column="EM_DETAIL" property="emDetail" jdbcType="VARCHAR" />
+		<result column="EM_DETAIL" property="emDetail"
+			jdbcType="VARCHAR" />
 		<result column="EM_NUM" property="emNum" jdbcType="INTEGER" />
 	</resultMap>
 	<sql id="Base_Column_List">
@@ -23,52 +26,60 @@
 	</sql>
 	<!-- int count(); -->
 	<select id="count" resultType="java.lang.Integer">
-		exec proc_count 'ESSAY_MESSAGE'
+		select count(*) from essay_message
+		<!-- exec proc_count 'ESSAY_MESSAGE' -->
 	</select>
 
 	<!-- List<ESSAY_MESSAGE> queryall(Map<String, Object> m); -->
-	<select id="queryall" statementType="CALLABLE" resultMap="BaseResultMap">
-		EXEC
-		prc_PageResult
-		#{currPage},'
-		<include refid="Base_Column_List" />
-		','ESSAY_MESSAGE','','EM_ID','0','EM_ID','10'
+	<select id="queryall" statementType="CALLABLE"
+		resultMap="BaseResultMap">
+		select * from essay_message limit #{currPage},10
+		<!-- EXEC prc_PageResult #{currPage},' <include refid="Base_Column_List" 
+			/> ','ESSAY_MESSAGE','','EM_ID','0','EM_ID','10' -->
 	</select>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from ESSAY_MESSAGE
+		from essay_message
 		where EM_ID = #{emId,jdbcType=INTEGER}
 	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
 		delete from
-		ESSAY_MESSAGE
-		where EM_ID = #{emId,jdbcType=INTEGER}
+		essay_message
+		where EM_ID =
+		#{emId,jdbcType=INTEGER}
 	</delete>
-	<insert id="insert" parameterType="com.circle.entity.ESSAY_MESSAGE">
-		insert into ESSAY_MESSAGE (
+	<insert id="insert"
+		parameterType="com.circle.entity.ESSAY_MESSAGE">
+		insert into essay_message (
 		EM_TITLE, EM_SORT,
-		EM_JOB, EM_JOBS, EM_IMG,
+		EM_JOB,
+		EM_JOBS, EM_IMG,
 		EM_SOURCE, EM_DATE,
 		EM_BRIEF,
-		EM_LABLE, EM_DETAIL, EM_NUM
+		EM_LABLE, EM_DETAIL,
+		EM_NUM
 		)
 		values (
 		#{emTitle,jdbcType=VARCHAR},
 		#{emSort,jdbcType=INTEGER},
-		#{emJob,jdbcType=INTEGER}, #{emJobs,jdbcType=VARCHAR},
+		#{emJob,jdbcType=INTEGER},
+		#{emJobs,jdbcType=VARCHAR},
 		#{emImg,jdbcType=VARCHAR},
 		#{emSource,jdbcType=VARCHAR},
 		#{emDate,jdbcType=TIMESTAMP},
 		#{emBrief,jdbcType=VARCHAR},
-		#{emLable,jdbcType=VARCHAR}, #{emDetail,jdbcType=VARCHAR},
+		#{emLable,jdbcType=VARCHAR},
+		#{emDetail,jdbcType=VARCHAR},
 		#{emNum,jdbcType=INTEGER}
 		)
 	</insert>
-	<insert id="insertSelective" parameterType="com.circle.entity.ESSAY_MESSAGE">
-		insert into ESSAY_MESSAGE
+	<insert id="insertSelective"
+		parameterType="com.circle.entity.ESSAY_MESSAGE">
+		insert into essay_message
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="emId != null">
 				EM_ID,
@@ -146,8 +157,9 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.ESSAY_MESSAGE">
-		update ESSAY_MESSAGE
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.circle.entity.ESSAY_MESSAGE">
+		update essay_message
 		<set>
 			<if test="emTitle != null">
 				EM_TITLE = #{emTitle,jdbcType=VARCHAR},
@@ -185,15 +197,18 @@
 		</set>
 		where EM_ID = #{emId,jdbcType=INTEGER}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.circle.entity.ESSAY_MESSAGE">
+	<update id="updateByPrimaryKey"
+		parameterType="com.circle.entity.ESSAY_MESSAGE">
 		update
-		ESSAY_MESSAGE
-		set EM_TITLE = #{emTitle,jdbcType=VARCHAR},
+		essay_message
+		set EM_TITLE =
+		#{emTitle,jdbcType=VARCHAR},
 		EM_SORT =
 		#{emSort,jdbcType=INTEGER},
 		EM_JOB = #{emJob,jdbcType=INTEGER},
 		EM_JOBS
-		= #{emJobs,jdbcType=VARCHAR},
+		=
+		#{emJobs,jdbcType=VARCHAR},
 		EM_IMG = #{emImg,jdbcType=VARCHAR},
 		EM_SOURCE = #{emSource,jdbcType=VARCHAR},
 		EM_DATE =

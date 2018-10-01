@@ -13,7 +13,7 @@
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
-		<include refid="Base_Column_List" />
+		*
 		from capital_category
 		where cc_id = #{ccId,jdbcType=INTEGER}
 	</select>
@@ -21,7 +21,7 @@
 	<!-- List<Capital> querybigtype(); -->
 	<select id="querybigtype" resultMap="BaseResultMap">
 		select
-		<include refid="Base_Column_List" />
+		*
 		from capital_category
 		where cc_parent_id = 0 order by cc_desc
 	</select>

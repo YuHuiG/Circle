@@ -16,27 +16,29 @@
 
 	<!-- int count(); -->
 	<select id="count" resultType="java.lang.Integer">
-		exec proc_count 'LINK_MESSAGE'
+	select count(*) from link_message
+		<!-- exec proc_count 'LINK_MESSAGE' -->
 	</select>
 	<!-- List<LINK_MESSAGE> queryall(Map<String, Object> m); -->
 	<select id="queryall" statementType="CALLABLE" resultMap="BaseResultMap">
-		EXEC
+		select * from link_message limit #{currPage},10
+		<!-- EXEC
 		prc_PageResult
 		#{currPage},'
 		<include refid="Base_Column_List" />
-		','LINK_MESSAGE','','LM_ID','0','LM_ID','10'
+		','LINK_MESSAGE','','LM_ID','0','LM_ID','10' -->
 
 	</select>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
 		<include refid="Base_Column_List" />
-		from LINK_MESSAGE
+		from link_message
 		where LM_ID = #{lmId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
-		LINK_MESSAGE
+		link_message
 		where LM_ID = #{lmId,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.circle.entity.LINK_MESSAGE">
@@ -51,7 +53,7 @@
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.circle.entity.LINK_MESSAGE">
-		insert into LINK_MESSAGE
+		insert into link_message
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="lmId != null">
 				LM_ID,
@@ -94,7 +96,7 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.circle.entity.LINK_MESSAGE">
-		update LINK_MESSAGE
+		update link_message
 		<set>
 			<if test="lmTitle != null">
 				LM_TITLE = #{lmTitle,jdbcType=VARCHAR},
@@ -116,7 +118,7 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.circle.entity.LINK_MESSAGE">
 		update
-		LINK_MESSAGE
+		link_message
 		set LM_TITLE = #{lmTitle,jdbcType=VARCHAR},
 		LM_TYPEID =
 		#{lmTypeid,jdbcType=INTEGER},
